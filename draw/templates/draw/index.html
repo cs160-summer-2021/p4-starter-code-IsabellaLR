@@ -48,20 +48,31 @@
 
     socket.onmessage = function(receivedMessage) {
         var received = JSON.parse(receivedMessage.data);
+        // You will probably want to add some code here to draw more lines.
         //1A
         var point = new paper.Point(received.x, received.y);
-        var uid = received.uid;
-        if (!(uid in uidPaths)) {
+        var recUid = received.uid;
+        //1C
+        if (url.includes("large")) {
+            if (recUid == uid) {
+                return
+            }
+        } else if (url.includes("small")) {
+            if (recUid != uid) {
+                return
+            }
+        }
+        //1C
+        if (!(recUid in uidPaths)) {
             newPath = new paper.Path();
             //1B
             newPath.strokeColor = "#" + received.color.toString(16);
             //1B
-            uidPaths[uid] = newPath;
+            uidPaths[recUid] = newPath;
         }
-        uidPaths[uid].add(point)
+        uidPaths[recUid].add(point)
         //1A
         console.log("Received: " + JSON.stringify(received));
-        // You will probably want to add some code here to draw more lines.
     }
 
     socket.onclose = function(e) {

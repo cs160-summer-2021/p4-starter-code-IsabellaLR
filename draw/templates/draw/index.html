@@ -29,6 +29,9 @@
     //1A
     var uidPaths = {};
     //1A
+    //1B
+    var uidColors = {};
+    //1B
     path.strokeColor = "red";
 
     // getting the URL (you may want to use for Exercise 3)
@@ -40,7 +43,7 @@
     tool.onMouseMove = function(event) { //http://paperjs.org/reference/tool/ path examples
        path.add(event.point);
        // You may need to add code here if you want to pass any other information.
-       socket.send("{\"x\" : " + event.point.x + ", \"y\" : " + event.point.y + ", \"uid\" : " + uid + "}" );
+       socket.send("{\"color\" : " + event.point.x + ", \"x\" : " + event.point.x + ", \"y\" : " + event.point.y + ", \"uid\" : " + uid + "}" );
     }
 
     socket.onmessage = function(receivedMessage) {
@@ -49,7 +52,15 @@
         var point = new paper.Point(received.x, received.y);
         var uid = received.uid;
         if (!(uid in uidPaths)) {
-            uidPaths[uid] = path;
+            newPath = new paper.Path();
+            //1B
+            var randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+            newPath.strokeColor = randomColor;
+            uidColors[uid] = randomColor;
+            //1B
+            uidPaths[uid] = newPath;
+        } else {
+            uidPaths[uid].strokeColor = uidColors[uid];
         }
         uidPaths[uid].add(point)
         //1A

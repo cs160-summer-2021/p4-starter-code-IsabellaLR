@@ -53,11 +53,7 @@
         var point = new paper.Point(received.x, received.y);
         var recUid = received.uid;
         //1C
-        if (url.includes("large")) {
-            if (recUid == uid) {
-                return
-            }
-        } else if (url.includes("small")) {
+        if (url.includes("small")) {
             if (recUid != uid) {
                 return
             }

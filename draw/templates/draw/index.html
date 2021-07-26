@@ -10,6 +10,7 @@
     <script type="text/javascript" src="{% static 'draw/vendor/jquery/jquery-3.3.1.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'draw/vendor/paper/paper-full.min.js' %}"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
     <style type="text/css">
         .circle {
@@ -45,7 +46,21 @@
 </head>
 <body>
     <!-- First version with Edit button at the bottom-->
-    <div class="container-fluid first">
+    <h1 id="title" class="font-weight-bold text-center">DAY IN THE LIFE NEW YORK</h1>
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" style="background-color: peru;">
+        <!-- Indicators -->
+        <ol class="carousel-indicators"></ol>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner"></div>
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background-color: slateblue;">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </div>
+    <div id = "firstContainer" class="container-fluid first">
         <!-- This is the top bar, it is resizeable-->
         <div class="row ui" style="height:8vh;width:100vw;">
             <div class="col-2 px-0">
@@ -69,7 +84,13 @@
         <!-- This is the canvas.-->
         <div class="row" style="height:52vh;width:100vw;">
             <div class="col-12 px-0" style="height:100%;width:100%;">
-                <canvas id="myCanvas" width="800px" height="600px" style="width:100%;height:100%;"></canvas>
+                <div id="myCamera" class="camera">
+                    <video id="video" style="height:100%;width:100%;">Video stream not available.</video>
+                    <button id="startbutton">Take photo</button>
+                </div>
+                <canvas id="picCanvas" width="800px" height="600px" style="width:100%;height:100%;">
+                </canvas>
+                <button id="retakeButton">Retake photo</button>
             </div>
         </div>
 
@@ -144,17 +165,19 @@
         <!-- Submit Button-->
         <div class="row ui" style="height:18vh;width:100vw;">
             <div class="col-12 px-0">
-                <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
-                    <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
-                        Submit
-                    </p>
-                </span>
+                <div id = "submitButton" button>
+                    <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
+                        <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
+                            Submit
+                        </p>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Second Version with Edit button at the top-->
-    <div class="container-fluid second">
+    <div id = "secondContainer" class="container-fluid second">
         <!-- This is the top bar, it is resizeable. CHANGED-->
         <div class="row ui" style="height:8vh;width:100vw;">
             <div class="col-2 px-0">
@@ -185,7 +208,13 @@
         <!-- This is the canvas.-->
         <div class="row" style="height:52vh;width:100vw;">
             <div class="col-12 px-0" style="height:100%;width:100%;">
-                <canvas id="myCanvas" width="800px" height="600px" style="width:100%;height:100%;"></canvas>
+                <div id="myCamera" class="camera">
+                    <video id="video" style="height:100%;width:100%;">Video stream not available.</video>
+                    <button id="startbutton">Take photo</button>
+                    <button id="retakeButton">Retake photo</button>
+                </div>
+                <canvas id="picCanvas" width="800px" height="600px" style="width:100%;height:100%;">
+                </canvas>
             </div>
         </div>
 
@@ -248,11 +277,13 @@
         <!-- Submit Button-->
         <div class="row ui" style="height:18vh;width:100vw;">
             <div class="col-12 px-0">
-                <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
-                    <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
-                        Submit
-                    </p>
-                </span>
+                <div id = "submitButton" button>
+                    <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
+                        <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
+                            Submit
+                        </p>
+                    </span>
+                </div>
             </div>
         </div>
     </div>
@@ -270,66 +301,161 @@
         $(".first").css("display", "none");
         $(".second").css("display", "block");
     }
-</script>
 
-<!-- ORIGINAL
-<script>
+    var firstContainer = document.getElementById('firstContainer');
+    var secondContainer = document.getElementById('secondContainer');
+    var cameraButton = document.getElementById('myCamera');
+    var submitButton = document.getElementById('submitButton');
+    var video = null;
+    var picCanvas = null;
+    var startbutton = null;
+    var retakeButton = null;
+    video = document.getElementById('video');
+    picCanvas = document.getElementById('picCanvas');
+    startbutton = document.getElementById('startbutton');
+    retakeButton = document.getElementById('retakeButton');
+    title = document.getElementById('title');
 
-    // setting up the canvas and one paper tool
-    var canvas = document.getElementById('myCanvas');
-    paper.setup(canvas);
-    var tool = new paper.Tool();
-    var path = new paper.Path();
-    var uid = Date.now() % 10000;
-    //1A
-    var uidPaths = {};
-    //1A
-    //1B
-    var randomColor = Math.floor(Math.random()*16777215);
-    //1B
-    path.strokeColor = "red";
-
-    // getting the URL (you may want to use for Exercise 3)
-    var url = window.location.href;
+    function hello() {
+        console.log('retake');
+        alert('Hello');
+    }
 
     var socket = new WebSocket(
         'ws://' + window.location.host + '/ws/draw');
+    var submissions = [];
 
-    tool.onMouseMove = function(event) { //http://paperjs.org/reference/tool/ path examples
-       path.add(event.point);
-       // You may need to add code here if you want to pass any other information.
-       socket.send("{\"x\" : " + event.point.x + ", \"y\" : " + event.point.y + ", \"uid\" : " + uid + ", \"color\" : " + randomColor + "}");
+    if (url.includes("large")) {
+        cameraButton.style.display = 'none';
+        picCanvas.style.display = 'none';
+        firstContainer.style.display = 'none';
+        secondContainer.style.display = 'none';
+    } else {
+        title.style.display = 'none';
     }
+    retakeButton.style.display = 'none';
+
+
+    // The width and height of the captured photo. We will set the
+    // width to the value defined here, but the height will be
+    // calculated based on the aspect ratio of the input stream.
+
+    var width = 320;    // We will scale the photo width to this
+    var height = 0;     // This will be computed based on the input stream
+
+    // |streaming| indicates whether or not we're currently streaming
+    // video from the camera. Obviously, we start at false.
+    var streaming = false;
+
+    function startup() {
+
+        navigator.mediaDevices.getUserMedia({video: true, audio: false})
+        .then(function(stream) {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(function(err) {
+            console.log("An error occurred: " + err);
+        });
+
+        video.addEventListener('canplay', function(ev){
+            if (!streaming) {
+                height = video.videoHeight / (video.videoWidth/width);
+            
+                // Firefox currently has a bug where the height can't be read from
+                // the video, so we will make assumptions if this happens.
+            
+                if (isNaN(height)) {
+                    height = width / (4/3);
+                }
+            
+                video.setAttribute('width', width);
+                video.setAttribute('height', height);
+                picCanvas.setAttribute('width', width);
+                picCanvas.setAttribute('height', height);
+                streaming = true;
+            }}, false);
+
+        startbutton.addEventListener('click', function(ev){
+            takepicture();
+            ev.preventDefault();
+        }, false);
+
+        clearphoto();
+    }
+
+        // Fill the photo with an indication that none has been
+        // captured.
+
+    function clearphoto() {
+        var context = picCanvas.getContext('2d');
+        context.fillStyle = "#AAA";
+        context.fillRect(0, 0, picCanvas.width, picCanvas.height);
+
+        var data = picCanvas.toDataURL('image/png');
+    }
+    
+    // Capture a photo by fetching the current contents of the video
+    // and drawing it into a canvas, then converting that to a PNG
+    // format data URL. By drawing it on an offscreen canvas and then
+    // drawing that to the screen, we can change its size and/or apply
+    // other changes before drawing it.
+
+    function takepicture() {
+        var context = picCanvas.getContext('2d');
+        if (width && height) {
+            picCanvas.width = width;
+            picCanvas.height = height;
+            context.drawImage(video, 0, 0, width, height);
+            
+            var data = picCanvas.toDataURL('image/png');
+            //hide video after to just show pic captured
+            video.style.display = 'none';
+            startbutton.style.display = 'none';
+            retakeButton.style.display = '';
+            submitButton.addEventListener('click', function(ev){
+                console.log("submit")
+                socket.send(JSON.stringify({data}));
+            });
+
+            //not sure why this onClick not working
+            retakeButton.addEventListener('click', function(ev){
+                console.log("replay vid")
+                picCanvas.style.display = 'none';
+                video.style.display = '';             
+            });
+        } else {
+            clearphoto();
+        }
+    }
+
+    // Set up our event listener to run the startup process
+    // once loading is complete.
+    window.addEventListener('load', startup, false);
 
     socket.onmessage = function(receivedMessage) {
         var received = JSON.parse(receivedMessage.data);
-        // You will probably want to add some code here to draw more lines.
-        //1A
-        var point = new paper.Point(received.x, received.y);
-        var recUid = received.uid;
-        //1C
-        if (url.includes("small")) {
-            if (recUid != uid) {
-                return
+        
+        if (url.includes("large")) {
+            var rUrl = received.data;
+            submissions.push(rUrl);
+            var slideNum = submissions.length - 1;
+            $('<div class="carousel-item"><img src="'+rUrl+'" width="100%"></div>').appendTo('.carousel-inner');
+            $('<li data-target="#carousel" data-slide-to="'+slideNum+'"></li>').appendTo('.carousel-indicators')
+            if (slideNum == 0) {
+                $('.carousel-item').first().addClass('active');
+                $('.carousel-indicators > li').first().addClass('active');
+                $(document).ready(function() {
+                    $('#carousel-example-generic').carousel({
+                        //how long each slide in carousel shows (first one might take longer sometimes)
+                        interval: 3000
+                    });
+                });
             }
         }
-        //1C
-        if (!(recUid in uidPaths)) {
-            newPath = new paper.Path();
-            //1B
-            newPath.strokeColor = "#" + received.color.toString(16);
-            //1B
-            uidPaths[recUid] = newPath;
-        }
-        uidPaths[recUid].add(point)
-        //1A
-        console.log("Received: " + JSON.stringify(received));
     }
 
     socket.onclose = function(e) {
         console.error('Chat socket closed unexpectedly');
     };
-
 </script>
--->
-</html>

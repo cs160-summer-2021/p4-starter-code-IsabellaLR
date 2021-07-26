@@ -33,22 +33,30 @@
             border-radius: 40px;
             display: inline-block;
         }
+        .ui {
+            border:4px solid #f5cd79;
+            background-color:#f5cd79;
+        }
     </style>
 
 </head>
 <body>
     <div class="container-fluid">
         <!-- This is the top bar, it is resizeable-->
-        <div class="row" style="background-color:#f5cd79;height:8vh;width:100vw;border:2px solid #f5cd79;">
+        <div class="row ui" style="height:8vh;width:100vw;">
             <div class="col-2 px-0">
-                <span class="material-icons" style="font-size:4vh;padding-top:2vh;padding-left:4vw;">arrow_back</span>
+                <span class="material-icons" style="font-size:4vh;padding-top:2vh;padding-left:4vw;">
+                    arrow_back
+                </span>
             </div>
 
             <div class="col-8 px-0"></div>
 
             <div class="col-2 px-0">
                 <span class="circle" style="margin-top:1vh;">
-                    <span class="material-icons" style="font-size:3vh;padding-left:25%;padding-top:1.3vh;">ios_share</span>
+                    <span class="material-icons" style="font-size:3vh;padding-left:25%;padding-top:1.3vh;">
+                        ios_share
+                    </span>
                 </span>
             </div>
         </div>
@@ -64,43 +72,78 @@
 
         <!-- This is the bottom bar.-->
         <!-- Share Text-->
-        <div class="row" style="height:6vh;width:100vw;border:2px solid #f5cd79;">
-            <div class="col-6 px-0" style="background-color:#f5cd79;">
+        <div class="row ui" style="height:6vh;width:100vw;">
+            <div class="col-6 px-0">
             </div>
-            <div class="col-3 px-0" style="background-color:#f5cd79;padding-top:1vh">
-                <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">Share</p>
+            <div class="col-3 px-0" style="padding-top:1vh">
+                <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
+                    Share
+                </p>
             </div>
-            <div class="col-3 px-0" style="background-color:#f5cd79;">
+            <div class="col-3 px-0">
             </div>
         </div>
         <!-- Edit and Sharing options-->
-        <div class="row" style="height:16vh;width:100vw;border:2px solid #f5cd79;">
-            <div class="col-3 px-0" style="background-color:#f5cd79;">
+        <div class="row ui" style="height:12vh;width:100vw;">
+            <div class="col-3 px-0 ">
                 <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#f78fb3;">
-                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">edit</span>
+                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
+                        edit
+                    </span>
                 </span>
             </div>
-            <div class="col-3 px-0" style="background-color:#f5cd79;">
+            <div class="col-3 px-0 ">
                 <span class="rounded-square" style="margin-top:2vh;margin-left:8vw;background-color:#7ea9ff;">
-                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">facebook</span>
+                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
+                        facebook
+                    </span>
                 </span>
             </div>
-            <div class="col-3 px-0" style="background-color:#f5cd79;">
+            <div class="col-3 px-0 ">
                 <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#23d3b0;">
-                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">textsms</span>
+                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
+                        textsms
+                    </span>
                 </span>
             </div>
-            <div class="col-3 px-0" style="background-color:#f5cd79;">
+            <div class="col-3 px-0 ">
                 <span class="rounded-square" style="margin-top:2vh;margin-left:3vw;background-color:#f19066;">
-                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">more_horiz</span>
+                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
+                        more_horiz
+                    </span>
                 </span>
             </div>
         </div>
+        <!-- Button Desc-->
+        <div class="row ui" style="height:4vh;width:100vw;">
+            <div class="col-3 px-0">
+                <p style="margin-left:7.5vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
+                    Edit
+                </p>
+            </div>
+            <div class="col-3 px-0">
+                <p style="margin-left:12vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
+                    FB
+                </p>
+            </div>
+            <div class="col-3 px-0">
+                <p style="margin-left:7.5vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
+                    SMS
+                </p>
+            </div>
+            <div class="col-3 px-0">
+                <p style="margin-left:4.5vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
+                    More
+                </p>
+            </div>
+        </div>
         <!-- Submit Button-->
-        <div class="row" style="height:18vh;width:100vw;">
-            <div class="col-12 px-0" style="background-color:#f5cd79;">
+        <div class="row ui" style="height:18vh;width:100vw;">
+            <div class="col-12 px-0">
                 <span class="rounded-rect" style="margin-top:2vh;margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
-                    <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">Submit</p>
+                    <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
+                        Submit
+                    </p>
                 </span>
             </div>
         </div>

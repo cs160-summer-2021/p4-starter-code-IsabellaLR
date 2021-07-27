@@ -399,17 +399,13 @@
     retakeButton.style.display = 'none';
     filters.style.display = 'none';
 
-    // The width and height of the captured photo. We will set the
-    // width to the value defined here, but the height will be
-    // calculated based on the aspect ratio of the input stream.
+    var width = 320;   
+    var height = 0;     
 
-    var width = 320;    // We will scale the photo width to this
-    var height = 0;     // This will be computed based on the input stream
-
-    // |streaming| indicates whether or not we're currently streaming
-    // video from the camera. Obviously, we start at false.
     var streaming = false;
 
+
+    // Taking photos with WebRTC https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos
     function startup() {
 
         navigator.mediaDevices.getUserMedia({video: true, audio: false})
@@ -505,6 +501,7 @@
             clearphoto();
         }
     }
+    // Taking photos with WebRTC https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos
 
     //edit photo
     var filterControls = document.querySelectorAll('input[type=range]');

@@ -41,13 +41,17 @@
         .second {
             display: none;
         }
+        input[type="range"] {
+            width:80%;
+            height:5vh;
+        }
     </style>
 
 </head>
 <body>
     <!-- First version with Edit button at the bottom-->
     <h1 id="title" class="font-weight-bold text-center">DAY IN THE LIFE NEW YORK</h1>
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="4000" style="background-color: peru;">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000" style="background-color: peru;">
         <!-- Indicators -->
         <ol class="carousel-indicators"></ol>
         <!-- Wrapper for slides -->
@@ -60,7 +64,7 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
     </div>
-    <div id = "firstContainer" class="container-fluid first">
+    <div id = "firstContainer" class="container-fluid first" style="background-color: #f5cd79;">
         <!-- This is the top bar, it is resizeable-->
         <div class="row ui" style="height:8vh;width:100vw;">
             <div class="col-2 px-0">
@@ -69,10 +73,12 @@
                 </span>
             </div>
 
-            <div class="col-8 px-0"></div>
+            <div class="col-8 px-0">
+                <h1 class="font-weight-bold text-center" style="font-size:3vh;padding-top:2vh;">New York</h1>
+            </div>
 
             <div class="col-2 px-0">
-                <span class="circle" style="margin-top:1vh;">
+                <span class="circle" style="margin-top:0.7vh;">
                     <span class="material-icons" style="font-size:3vh;padding-left:25%;padding-top:1.3vh;">
                         ios_share
                     </span>
@@ -86,19 +92,29 @@
             <div class="col-12 px-0" style="height:100%;width:100%;">
                 <div id="myCamera" class="camera">
                     <video id="video" style="height:100%;width:100%;">Video stream not available.</video>
-                    <button id="startbutton">Take photo</button>
                 </div>
-                <canvas id="picCanvas" width="800px" height="600px" style="width:100%;height:100%;">
+                <canvas id="picCanvas" width="800px" height="600px" style="width:100%;height:100%; filter: blur(0px) brightness(64%) contrast(100%) grayscale(0%) hue-rotate(0deg) invert(0%) opacity(100%) saturate(1) sepia(0%);">
                 </canvas>
-                <button id="retakeButton">Retake photo</button>
             </div>
         </div>
 
 
         <!-- This is the bottom bar.-->
         <!-- Share Text-->
-        <div class="row ui" style="height:6vh;width:100vw;">
-            <div class="col-6 px-0">
+        <div id = "topButtons" class="row ui" style="height:6vh;width:100vw;">
+            <div class="col-3 px-0">
+            </div>
+            <div class="col-3 px-0" style="padding-top:1vh">
+                <button id="startbutton">
+                    <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
+                        Take Photo
+                    </p>
+                </button>
+                <button id="retakeButton">
+                    <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
+                        Retake
+                    </p>
+                </button>
             </div>
             <div class="col-3 px-0" style="padding-top:1vh">
                 <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
@@ -109,23 +125,25 @@
             </div>
         </div>
         <!-- Edit and Sharing options-->
-        <div class="row ui" style="height:12vh;width:100vw;">
+        <div id = "bottomButtons" class="row ui" style="height:12vh;width:100vw;">
             <div class="col-3 px-0 ">
-                <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#f78fb3;">
-                    <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
-                        edit
+                <div id = "editButton" button>
+                    <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#f78fb3;">
+                        <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
+                            edit
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
             <div class="col-3 px-0 ">
-                <span class="rounded-square" style="margin-top:2vh;margin-left:8vw;background-color:#7ea9ff;">
+                <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#7ea9ff;">
                     <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
                         facebook
                     </span>
                 </span>
             </div>
             <div class="col-3 px-0 ">
-                <span class="rounded-square" style="margin-top:2vh;margin-left:5.5vw;background-color:#23d3b0;">
+                <span class="rounded-square" style="margin-top:2vh;margin-left:5vw;background-color:#23d3b0;">
                     <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
                         textsms
                     </span>
@@ -140,14 +158,14 @@
             </div>
         </div>
         <!-- Button Desc-->
-        <div class="row ui" style="height:4vh;width:100vw;">
+        <div id = "buttonText" class="row ui" style="height:4vh;width:100vw;">
             <div class="col-3 px-0">
                 <p style="margin-left:7.5vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
                     Edit
                 </p>
             </div>
             <div class="col-3 px-0">
-                <p style="margin-left:12vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
+                <p style="margin-left:9vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
                     FB
                 </p>
             </div>
@@ -163,7 +181,7 @@
             </div>
         </div>
         <!-- Submit Button-->
-        <div class="row ui" style="height:18vh;width:100vw;">
+        <div id = "submitRow" class="row ui" style="height:18vh;width:100vw;">
             <div class="col-12 px-0">
                 <div id = "submitButton" button>
                     <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
@@ -177,7 +195,7 @@
     </div>
 
     <!-- Second Version with Edit button at the top-->
-    <div id = "secondContainer" class="container-fluid second">
+    <div id = "secondContainer" class="container-fluid second" style="background-color: #f5cd79;">
         <!-- This is the top bar, it is resizeable. CHANGED-->
         <div class="row ui" style="height:8vh;width:100vw;">
             <div class="col-2 px-0">
@@ -186,13 +204,17 @@
                 </span>
             </div>
 
-            <div class="col-6 px-0"></div>
+            <div class="col-6 px-0">
+                <h1 class="font-weight-bold text-center" style="font-size:3vh;padding-top:2vh;">New York</h1>
+            </div>
             <div class="col-2 px-0">
-                <span class="circle" style="margin-top:1vh;">
-                    <span class="material-icons" style="font-size:3vh;padding-left:25%;padding-top:1.3vh;">
-                        edit
+                <div id = "editButton2" button>
+                    <span class="circle" style="margin-top:1vh;">
+                        <span class="material-icons" style="font-size:3vh;padding-left:25%;padding-top:1.3vh;">
+                            edit
+                        </span>
                     </span>
-                </span>
+                </div>
             </div>
 
             <div class="col-2 px-0">
@@ -208,12 +230,10 @@
         <!-- This is the canvas.-->
         <div class="row" style="height:52vh;width:100vw;">
             <div class="col-12 px-0" style="height:100%;width:100%;">
-                <div id="myCamera" class="camera">
-                    <video id="video" style="height:100%;width:100%;">Video stream not available.</video>
-                    <button id="startbutton">Take photo</button>
-                    <button id="retakeButton">Retake photo</button>
+                <div id="myCamera2" class="camera">
+                    <video id="video2" style="height:100%;width:100%;">Video stream not available.</video>
                 </div>
-                <canvas id="picCanvas" width="800px" height="600px" style="width:100%;height:100%;">
+                <canvas id="picCanvas2" width="800px" height="600px" style="width:100%;height:100%;">
                 </canvas>
             </div>
         </div>
@@ -221,19 +241,31 @@
 
         <!-- This is the bottom bar.-->
         <!-- Share Text CHANGED-->
-        <div class="row ui" style="height:6vh;width:100vw;">
-            <div class="col-4 px-0">
+        <div id = "topButtons2" class="row ui" style="height:6vh;width:100vw;">
+            <div class="col-3 px-0">
             </div>
-            <div class="col-4 px-0" style="padding-top:1vh">
+            <div class="col-3 px-0" style="padding-top:1vh">
+                <button id="startbutton2">
+                    <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
+                        Take Photo
+                    </p>
+                </button>
+                <button id="retakeButton2">
+                    <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
+                        Retake
+                    </p>
+                </button>
+            </div>
+            <div class="col-3 px-0" style="padding-top:1vh">
                 <p style="font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;text-align:center;">
                     Share
                 </p>
             </div>
-            <div class="col-4 px-0">
+            <div class="col-3 px-0">
             </div>
         </div>
         <!-- Edit and Sharing options CHANGED-->
-        <div class="row ui" style="height:12vh;width:100vw;">
+        <div id = "bottomButtons2" class="row ui" style="height:12vh;width:100vw;">
             <div class="col-4 px-0 ">
                 <span class="rounded-square" style="margin-top:2vh;margin-left:10vw;background-color:#7ea9ff;">
                     <span class="material-icons" style="font-size:6vh;padding-top:1vh;padding-left:2vw;">
@@ -257,7 +289,7 @@
             </div>
         </div>
         <!-- Button Desc CHANGED-->
-        <div class="row ui" style="height:4vh;width:100vw;">
+        <div id = "buttonText2" class="row ui" style="height:4vh;width:100vw;">
             <div class="col-4 px-0">
                 <p style="margin-left:14vw;font-family:'Lucida Handwriting', cursive;font-size:2.5vh;font-weight:bold;">
                     FB
@@ -275,9 +307,9 @@
             </div>
         </div>
         <!-- Submit Button-->
-        <div class="row ui" style="height:18vh;width:100vw;">
+        <div id = "submitRow2" lass="row ui" style="height:18vh;width:100vw;">
             <div class="col-12 px-0">
-                <div id = "submitButton" button>
+                <div id = "submitButton2" button>
                     <span class="rounded-rect" style="margin-left:3vw;margin-top:3vh;background-color:#ff7675;">
                         <p style="font-family:'Lucida Handwriting',cursive;font-size:4vh;font-weight:bold;text-align:center;margin-top:1vh">
                             Submit
@@ -286,6 +318,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id = "filters" class="container text-center align-items-center">
+        <div class="row mt-2"></div>
+        <button id = "exitFilter" class="btn bg-transparent float-left">
+            <img src="https://img.icons8.com/material-outlined/24/000000/multiply--v1.png" width="40"/>
+       </button>
+       <div class="row mt-2"></div>
+        <label><h1>Brightness</h1></label>
+        <input type="range" min="0" max="100" value="100" step="1" onchange="applyFilter()" data-filter="brightness" data-scale="%"><br>
+        <label><h1>Contrast</h1></label>
+        <input type="range" min="0" max="100" value="100" step="1" onchange="applyFilter()" data-filter="contrast" data-scale="%"><br>
+        <label><h1>Hue Rotate</h1></label>
+        <input type="range" min="0" max="100" value="0" step="1" onchange="applyFilter()" data-filter="hue-rotate" data-scale="deg"><br>
+        <label><h1>Opacity</h1></label>
+        <input type="range" min="0" max="100" value="100" step="1" onchange="applyFilter()" data-filter="opacity" data-scale="%"><br>
     </div>
 
     <!-- ORIGINAL
@@ -296,29 +343,45 @@
 
 <script>
     var url = window.location.href;
-    // If URL contains the parameter "version=second", the second version of the app will be loaded.
-    if (url.includes("version=second")) {
-        $(".first").css("display", "none");
-        $(".second").css("display", "block");
-    }
-
-    var firstContainer = document.getElementById('firstContainer');
-    var secondContainer = document.getElementById('secondContainer');
-    var cameraButton = document.getElementById('myCamera');
-    var submitButton = document.getElementById('submitButton');
     var video = null;
     var picCanvas = null;
     var startbutton = null;
     var retakeButton = null;
-    video = document.getElementById('video');
-    picCanvas = document.getElementById('picCanvas');
-    startbutton = document.getElementById('startbutton');
-    retakeButton = document.getElementById('retakeButton');
-    title = document.getElementById('title');
+    var data = null;
+    var img = new Image;
+    var firstContainer = document.getElementById('firstContainer');
+    var secondContainer = document.getElementById('secondContainer');
+    var filters = document.getElementById('filters');
+    var exitFilter = document.getElementById('exitFilter');
+    var title = document.getElementById('title');
+    // If URL contains the parameter "version=second", the second version of the app will be loaded.
+    if (url.includes("version=second")) {
+        $(".first").css("display", "none");
+        $(".second").css("display", "block");
 
-    function hello() {
-        console.log('retake');
-        alert('Hello');
+        var cameraButton = document.getElementById('myCamera2');
+        var submitButton = document.getElementById('submitButton2');
+        var editButton = document.getElementById('editButton2');
+        var topButtons = document.getElementById('topButtons2');
+        var bottomButtons = document.getElementById('bottomButtons2');
+        var buttonText = document.getElementById('buttonText2');
+        var submitRow = document.getElementById('submitRow2');
+        video = document.getElementById('video2');
+        picCanvas = document.getElementById('picCanvas2');
+        startbutton = document.getElementById('startbutton2');
+        retakeButton = document.getElementById('retakeButton2');
+    } else {
+        var cameraButton = document.getElementById('myCamera');
+        var submitButton = document.getElementById('submitButton');
+        var editButton = document.getElementById('editButton');
+        var topButtons = document.getElementById('topButtons');
+        var bottomButtons = document.getElementById('bottomButtons');
+        var buttonText = document.getElementById('buttonText');
+        var submitRow = document.getElementById('submitRow');
+        video = document.getElementById('video');
+        picCanvas = document.getElementById('picCanvas');
+        startbutton = document.getElementById('startbutton');
+        retakeButton = document.getElementById('retakeButton');
     }
 
     var socket = new WebSocket(
@@ -334,7 +397,7 @@
         title.style.display = 'none';
     }
     retakeButton.style.display = 'none';
-
+    filters.style.display = 'none';
 
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be
@@ -384,31 +447,24 @@
         clearphoto();
     }
 
-        // Fill the photo with an indication that none has been
-        // captured.
-
     function clearphoto() {
         var context = picCanvas.getContext('2d');
         context.fillStyle = "#AAA";
         context.fillRect(0, 0, picCanvas.width, picCanvas.height);
 
-        var data = picCanvas.toDataURL('image/png');
+        data = picCanvas.toDataURL('image/png');
     }
-    
-    // Capture a photo by fetching the current contents of the video
-    // and drawing it into a canvas, then converting that to a PNG
-    // format data URL. By drawing it on an offscreen canvas and then
-    // drawing that to the screen, we can change its size and/or apply
-    // other changes before drawing it.
 
     function takepicture() {
+        picCanvas.style.display = '';
         var context = picCanvas.getContext('2d');
         if (width && height) {
             picCanvas.width = width;
             picCanvas.height = height;
             context.drawImage(video, 0, 0, width, height);
             
-            var data = picCanvas.toDataURL('image/png');
+            data = picCanvas.toDataURL('image/png');
+            img.src = data;  
             //hide video after to just show pic captured
             video.style.display = 'none';
             startbutton.style.display = 'none';
@@ -418,16 +474,51 @@
                 socket.send(JSON.stringify({data}));
             });
 
-            //not sure why this onClick not working
             retakeButton.addEventListener('click', function(ev){
                 console.log("replay vid")
                 picCanvas.style.display = 'none';
-                video.style.display = '';             
+                video.style.display = ''; 
+                retakeButton.style.display = 'none'; 
+                startbutton.style.display = '';           
+            });
+
+            editButton.addEventListener('click', function(ev){
+                console.log("touched edit button");
+                topButtons.style.display = 'none';
+                bottomButtons.style.display = 'none';  
+                buttonText.style.display = 'none'; 
+                submitButton.style.display = 'none'; 
+                submitRow.style.display = 'none'; 
+                filters.style.display = '';
+
+                exitFilter.addEventListener('click', function(ev){
+                    console.log("exit Filter button");
+                    filters.style.display = '';
+                    topButtons.style.display = '';
+                    bottomButtons.style.display = '';  
+                    buttonText.style.display = ''; 
+                    submitButton.style.display = ''; 
+                    submitRow.style.display = ''; 
+            });
             });
         } else {
             clearphoto();
         }
     }
+
+    //edit photo
+    var filterControls = document.querySelectorAll('input[type=range]');
+    function applyFilter() {
+        var computedFilters = '';
+        filterControls.forEach(function(item, index) {
+            computedFilters += item.getAttribute('data-filter') + '(' + item.value + item.getAttribute('data-scale') + ') ';
+        });
+        var context = picCanvas.getContext('2d');
+        context.filter = computedFilters;
+        context.drawImage(img, 0, 0, width, height);
+        data = picCanvas.toDataURL('image/png');
+        context.filter = "";
+    };
 
     // Set up our event listener to run the startup process
     // once loading is complete.
@@ -447,8 +538,6 @@
                 $('.carousel-indicators > li').first().addClass('active');
                 $(document).ready(function() {
                     $('#carousel-example-generic').carousel({
-                        //how long each slide in carousel shows (first one might take longer sometimes)
-                        interval: 3000
                     });
                 });
             }
